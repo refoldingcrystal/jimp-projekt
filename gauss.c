@@ -49,3 +49,11 @@ int elimination(Matrix *m){
 
   return EXIT_SUCCESS;
 }
+
+void free_matrix(Matrix *m) {
+    for (int i = 0; i < m->n; i++) {
+        free(m->data[i]);
+    }
+    free(m->data);
+    free(m);
+}
