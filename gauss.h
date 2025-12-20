@@ -6,8 +6,12 @@ typedef struct Matrix {
   double **data;
 } Matrix;
 
-Matrix *read_matrix();
+Matrix *create_matrix(int n);
+void read_matrix(Matrix *m);
 void print_matrix(Matrix *m);
 void free_matrix(Matrix *m);
+
+int elimination(Matrix *m);
+int backsubst(Matrix *m, double *x);
 
 #endif // !GAUSS_H
