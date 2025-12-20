@@ -1,8 +1,9 @@
 #include "gauss.h"
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-Matrix *create_matrix(int n){
+Matrix *create_matrix(int n) {
   Matrix *m = malloc(sizeof(Matrix));
   m->n = n;
   m->data = malloc(n * sizeof(double *));
@@ -28,24 +29,50 @@ void print_matrix(Matrix *m) {
   for (int i = 0; i < m->n; i++) {
     for (int j = 0; j < m->n; j++) {
       if (j) {
-        if (m->data[i][j] > 0) {
-          printf("+ %.2f ", m->data[i][j]);
-        } else {
-          printf("- %.2f ", m->data[i][j]);
-        }
-      } else {
-        printf("%.2f ", m->data[i][j]);
+        printf("%c ", m->data[i][j] > 0 ? '+' : '-');
       }
+      printf("\e[96m%.3g\e[0m×\e[93mx%d\e[0m ", m->data[i][j], j + 1);
     }
-    printf("= %.2f\n", m->data[i][m->n]);
+    printf("= \e[96m%.3g\e[0m\n", m->data[i][m->n]);
   }
 }
 
-int elimination(Matrix *m){
-  /*
-   * 0 - sukces
-   * 1 - macierz osobliwa
-   */
+int elimination(Matrix *m) {
+  if (m == NULL || m->data == NULL) {
+    return EXIT_FAILURE;
+  }
+
+  int n = m->n;
+
+  for (int k = 0; k < n; k++) {
+    int max_row = k;
+    double max_val = fabs(m->data[k][k]);
+
+    for (int i = k + 1; i < n; i++) {
+      if (fabs(m->data[i][k]) > max_val) {
+        max_val = fabs(m->data[i][k]);
+        max_row = i;
+      }
+    }
+
+    if (fabs(m->data[max_row][k]) < EPS) {
+      return EXIT_FAILURE;
+    }
+
+    if (max_row != k) {
+      double *temp = m->data[k];
+      m->data[k] = m->data[max_row];
+      m->data[max_row] = temp;
+    }
+
+    for (int i = k + 1; i < n; i++) {
+      double factor = m->data[i][k] / m->data[k][k];
+
+      for (int j = k; j <= n; j++) {
+        m->data[i][j] -= factor * m->data[k][j];
+      }
+    }
+  }
 
   return EXIT_SUCCESS;
 }

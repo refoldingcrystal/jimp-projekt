@@ -14,4 +14,5 @@ int main(){
     printf("Blad: macierz osobliwa\n");
     exit(EXIT_FAILURE);
   }
+  print_matrix(m);
 }

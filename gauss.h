@@ -1,6 +1,8 @@
 #ifndef GAUSS_H
 #define GAUSS_H
 
+#define EPS 1e-10
+
 typedef struct Matrix {
   int n;
   double **data;
