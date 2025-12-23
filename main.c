@@ -1,4 +1,5 @@
 #include "gauss.h"
+#include "print.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -17,7 +18,7 @@ int main() {
     exit(EXIT_FAILURE);
   }
   backsubst(m, ans);
-  print_matrix(m);
+//   print_matrix(m);
   print_answer(ans, m->n);
 
   free_matrix(m);

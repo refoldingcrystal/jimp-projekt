@@ -24,26 +24,6 @@ void read_matrix(Matrix *m) {
   }
 }
 
-void print_matrix(Matrix *m) {
-  printf("Macierz:\n");
-  for (int i = 0; i < m->n; i++) {
-    for (int j = 0; j < m->n; j++) {
-      if (j) {
-        printf("%c ", m->data[i][j] > 0 ? '+' : '-');
-      }
-      printf("\e[96m%.3g\e[0m×\e[93mx%d\e[0m ", fabs(m->data[i][j]), j + 1);
-    }
-    printf("= \e[96m%.3g\e[0m\n", m->data[i][m->n]);
-  }
-}
-
-void print_answer(double *ans, int n) {
-  printf("Rozwiazania: \n");
-  for (int i = 0; i < n; i++) {
-    printf("\e[93mx%d\e[0m - \e[96m%g\e[0m \n", i + 1, ans[i]);
-  }
-}
-
 int elimination(Matrix *m) {
   if (m == NULL || m->data == NULL) {
     return EXIT_FAILURE;
