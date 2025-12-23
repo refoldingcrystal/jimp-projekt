@@ -31,9 +31,16 @@ void print_matrix(Matrix *m) {
       if (j) {
         printf("%c ", m->data[i][j] > 0 ? '+' : '-');
       }
-      printf("\e[96m%.3g\e[0m×\e[93mx%d\e[0m ", m->data[i][j], j + 1);
+      printf("\e[96m%.3g\e[0m×\e[93mx%d\e[0m ", fabs(m->data[i][j]), j + 1);
     }
     printf("= \e[96m%.3g\e[0m\n", m->data[i][m->n]);
+  }
+}
+
+void print_answer(double *ans, int n) {
+  printf("Rozwiazania: \n");
+  for (int i = 0; i < n; i++) {
+    printf("\e[93mx%d\e[0m - \e[96m%g\e[0m \n", i + 1, ans[i]);
   }
 }
 
@@ -77,10 +84,25 @@ int elimination(Matrix *m) {
   return EXIT_SUCCESS;
 }
 
-void free_matrix(Matrix *m) {
-    for (int i = 0; i < m->n; i++) {
-        free(m->data[i]);
+int backsubst(Matrix *m, double *x) {
+  for (int i = m->n - 1; i >= 0; i--) {
+    for (int j = m->n - 1; j >= i; j--) {
+      if (i == j) {
+        x[i] = m->data[i][m->n] / m->data[i][j];
+        continue;
+      }
+
+      m->data[i][m->n] += (-1) * m->data[i][j] * x[j];
     }
-    free(m->data);
-    free(m);
+  }
+
+  return EXIT_SUCCESS;
+}
+
+void free_matrix(Matrix *m) {
+  for (int i = 0; i < m->n; i++) {
+    free(m->data[i]);
+  }
+  free(m->data);
+  free(m);
 }
