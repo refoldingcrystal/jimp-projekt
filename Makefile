@@ -1,2 +1,2 @@
 all: 
-	$(CC) *.c -o main
+	$(CC) *.c -o main -DTEST
