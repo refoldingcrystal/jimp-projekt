@@ -4,9 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char **argv) {
+int main() {
   int n;
+#ifndef TEST
   printf("Podaj liczbe zmiennych: ");
+#endif
   scanf("%d", &n);
 
   Matrix *m = create_matrix(n);
@@ -29,8 +31,6 @@ int main(int argc, char **argv) {
 #ifndef TEST
   print_answer(ans, m->n);
 #else
-  printf("\n");
-
   for (int i = 0; i < n; i++) {
     double value = fabs(ans[i]) < EPS ? 0.0 : ans[i];
     printf("%g ", value);

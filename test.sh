@@ -1,3 +1,4 @@
+make test
 for infile in test/in*; do
     [[ -f "$infile" ]] || continue
 
@@ -14,5 +15,6 @@ for infile in test/in*; do
         echo "PASS"
     else
         echo "FAIL"
+        diff <(./main < "$infile") "$outfile"
     fi
 done

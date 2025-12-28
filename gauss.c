@@ -14,10 +14,13 @@ Matrix *create_matrix(int n) {
 }
 
 void read_matrix(Matrix *m) {
-
+#ifndef TEST
   printf("Podaj dla kazdego rzedu kolejne wspolczynniki oraz wyraz wolny\n");
+#endif
   for (int i = 0; i < m->n; i++) {
+#ifndef TEST
     printf("Rzad %d: ", i + 1);
+#endif
     for (int j = 0; j <= m->n; j++) {
       scanf("%lf", &m->data[i][j]);
     }
