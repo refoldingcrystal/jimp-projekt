@@ -19,6 +19,7 @@ int main() {
   }
   backsubst(m, ans);
 //   print_matrix(m);
+  
   print_answer(ans, m->n);
 
   free_matrix(m);
