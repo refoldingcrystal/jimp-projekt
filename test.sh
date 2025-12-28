@@ -14,9 +14,9 @@ for infile in test/in*; do
 
     echo -n "$filename : "
     if diff -qw <(./main < "$infile") "$outfile" > /dev/null; then
-        echo "PASS"
+        echo -e "\e[92mPASS\e[0m"
     else
-        echo "FAIL"
+        echo -e "\e[91mFAIL\e[0m"
         diff <(./main < "$infile") "$outfile"
     fi
 done
