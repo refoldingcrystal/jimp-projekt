@@ -1,3 +1,5 @@
+#!/bin/bash
+
 make test
 for infile in test/in*; do
     [[ -f "$infile" ]] || continue
