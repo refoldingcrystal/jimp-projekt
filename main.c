@@ -1,3 +1,5 @@
+/* Projekt wykonany przez:  */
+
 #include "gauss.h"
 #include "print.h"
 #include <math.h>
