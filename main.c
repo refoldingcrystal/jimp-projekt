@@ -1,4 +1,4 @@
-/* Projekt wykonany przez: Krystian Ratajczyk */
+/* Projekt wykonany przez: Krystian Ratajczyk i Mateusz Łoziński */
 
 #include "gauss.h"
 #include "print.h"
